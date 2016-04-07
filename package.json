@@ -1,0 +1,26 @@
+{
+  "name": "babel-preset-jason",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jquense/babel-preset-jason.git"
+  },
+  "author": "Jason Quense",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jquense/babel-preset-jason/issues"
+  },
+  "homepage": "https://github.com/jquense/babel-preset-jason#readme",
+  "dependencies": {
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-transform-object-assign": "^6.5.0",
+    "babel-preset-es2015-loose": "^7.0.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0"
+  }
+}
