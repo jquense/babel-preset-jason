@@ -67,6 +67,8 @@ module.exports = function preset(_, options = {}) {
       // - convenience plugins --
       require.resolve('babel-plugin-jsx-fragment'),
       require.resolve('babel-plugin-dev-expression'),
+      require.resolve('babel-plugin-transform-object-assign'),
+      require.resolve('babel-plugin-add-module-exports'),
     ]
     .filter(Boolean),
   };
