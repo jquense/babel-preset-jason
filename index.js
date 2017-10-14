@@ -2,6 +2,8 @@ const runtimePlugin = require('babel-plugin-transform-runtime');
 const envPreset = require('babel-preset-env');
 const reactPreset = require('babel-preset-react');
 
+const r = p => p && p.__esModule ? p.default : p
+
 const defaultOptions = {
   target: 'web', // | 'node'
   loose: true,
@@ -38,8 +40,8 @@ module.exports = function preset(_, options = {}) {
     opts.modules = 'commonjs';
 
   const presets = [
-    [envPreset, opts],
-    target === 'web' && reactPreset,
+    [r(envPreset), opts],
+    target === 'web' && r(reactPreset),
   ].filter(Boolean);
 
 
@@ -59,7 +61,7 @@ module.exports = function preset(_, options = {}) {
       require.resolve('babel-plugin-transform-export-extensions'),
       // -----
 
-      opts.runtime && [runtimePlugin, {
+      opts.runtime && [r(runtimePlugin), {
         polyfill: false,
         regenerator: false,
       }],
