@@ -1,77 +1,71 @@
-const runtimePlugin = require('babel-plugin-transform-runtime');
-const envPreset = require('babel-preset-env');
-const reactPreset = require('babel-preset-react');
+const runtimePlugin = require('@babel/plugin-transform-runtime')
+const envPreset = require('@babel/preset-env')
+const reactPreset = require('@babel/preset-react')
 
-const r = p => p && p.__esModule ? p.default : p
+const r = p => (p && p.__esModule ? p.default : p)
 
 const defaultOptions = {
   target: 'web', // | 'node'
   loose: true,
   modules: 'commonjs',
   useBuiltIns: false,
+  shippedProposals: true,
   runtime: false,
-  debug: true,
-};
+  debug: false,
+}
 
-const nodeTarget = {
-  node: '6',
-};
-
-const webTargets = {
-  browsers: [
-    "> 1%",
-    "last 2 versions"
-  ],
-};
+const defaultBrowsers = ['> 1%', 'last 2 versions']
 
 module.exports = function preset(_, options = {}) {
-  const opts = Object.assign({}, defaultOptions, options);
-  const target = opts.target;
+  const env = process.env.NODE_ENV || 'production' // default to prod
 
-  if (target === 'web')
-    opts.targets = opts.targets || webTargets;
+  const opts = Object.assign({}, defaultOptions, options)
+  const target = opts.target
 
-  if (target === 'node')
-    opts.targets = opts.targets || nodeTarget;
+  const nodeTarget = {
+    node: env === 'production' ? '6' : 'current',
+  }
 
+  const webTargets = {
+    browsers:
+      env === 'production' ? defaultBrowsers : ['last 2 Chrome versions'],
+  }
+
+  if (target === 'web') {
+    opts.targets = opts.targets || webTargets
+    opts.runtime = options.runtime == null ? true : options.runtime
+  } else if (target === 'node') {
+    opts.targets = opts.targets || nodeTarget
+  }
 
   // cjs in a TEST environment
-  if (process.env.NODE_ENV === 'test' && options.modules == null)
-    opts.modules = 'commonjs';
-
-  const presets = [
-    [r(envPreset), opts],
-    target === 'web' && r(reactPreset),
-  ].filter(Boolean);
-
+  if (env === 'test' && options.modules == null) opts.modules = 'commonjs'
 
   return {
-    presets,
+    presets: [[r(envPreset), opts], r(reactPreset)],
     plugins: [
-      // - stage 3 --
-      require.resolve('babel-plugin-transform-object-rest-spread'),
-      // -----
+      require.resolve('@babel/plugin-syntax-dynamic-import'),
+      require.resolve('@babel/plugin-proposal-class-properties'),
+      require.resolve('@babel/plugin-proposal-export-default-from'),
+      require.resolve('@babel/plugin-proposal-export-namespace-from'),
 
-      // - stage 2 --
-      require.resolve('babel-plugin-syntax-dynamic-import'),
-      require.resolve('babel-plugin-transform-class-properties'),
-      // -----
+      opts.useBuiltIns === false &&
+        require.resolve('@babel/plugin-transform-object-assign'),
 
-      // - stage 1 --
-      require.resolve('babel-plugin-transform-export-extensions'),
-      // -----
-
-      opts.runtime && [r(runtimePlugin), {
-        polyfill: false,
-        regenerator: false,
-      }],
+      opts.runtime && [
+        r(runtimePlugin),
+        {
+          polyfill: false,
+          regenerator: false,
+          useBuiltIns: opts.useBuiltIns !== 'entry',
+          useESModules: opts.modules === false,
+        },
+      ],
 
       // - convenience plugins --
-      require.resolve('babel-plugin-jsx-fragment'),
       require.resolve('babel-plugin-dev-expression'),
-      require.resolve('babel-plugin-transform-object-assign'),
-      require.resolve('babel-plugin-add-module-exports'),
-    ]
-    .filter(Boolean),
-  };
-};
+      opts.modules === 'commonjs' &&
+        require.resolve('babel-plugin-add-module-exports'),
+    ].filter(Boolean),
+  }
+}
