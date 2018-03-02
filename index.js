@@ -34,6 +34,8 @@ module.exports = function preset(_, options = {}) {
   if (target === 'web') {
     opts.targets = opts.targets || webTargets
     opts.runtime = options.runtime == null ? true : options.runtime
+
+    opts.include = ['proposal-object-rest-spread']
   } else if (target === 'node') {
     opts.targets = opts.targets || nodeTarget
   }
@@ -42,10 +44,16 @@ module.exports = function preset(_, options = {}) {
   if (env === 'test' && options.modules == null) opts.modules = 'commonjs'
 
   return {
-    presets: [[r(envPreset), opts], r(reactPreset)],
+    presets: [
+      [r(envPreset), opts],
+      [r(reactPreset), { development: env !== 'production ' }],
+    ],
     plugins: [
+      [
+        require.resolve('@babel/plugin-proposal-class-properties'),
+        { loose: opts.loose },
+      ],
       require.resolve('@babel/plugin-syntax-dynamic-import'),
-      require.resolve('@babel/plugin-proposal-class-properties'),
       require.resolve('@babel/plugin-proposal-export-default-from'),
       require.resolve('@babel/plugin-proposal-export-namespace-from'),
 
@@ -66,6 +74,7 @@ module.exports = function preset(_, options = {}) {
       require.resolve('babel-plugin-dev-expression'),
       opts.modules === 'commonjs' &&
         require.resolve('babel-plugin-add-module-exports'),
+
     ].filter(Boolean),
   }
 }
