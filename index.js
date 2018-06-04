@@ -46,7 +46,7 @@ module.exports = function preset(_, options = {}) {
   return {
     presets: [
       [r(envPreset), opts],
-      [r(reactPreset), { development: env !== 'production ' }],
+      [r(reactPreset), { development: env !== 'production' }],
     ],
     plugins: [
       [
@@ -74,7 +74,6 @@ module.exports = function preset(_, options = {}) {
       require.resolve('babel-plugin-dev-expression'),
       opts.modules === 'commonjs' &&
         require.resolve('babel-plugin-add-module-exports'),
-
     ].filter(Boolean),
   }
 }
