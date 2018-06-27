@@ -1,8 +1,24 @@
 const runtimePlugin = require('@babel/plugin-transform-runtime')
 const envPreset = require('@babel/preset-env')
+const pick = require('lodash/pick');
 const reactPreset = require('@babel/preset-react')
 
 const r = p => (p && p.__esModule ? p.default : p)
+
+const presetEnvOptions = [
+  'configPath',
+  'debug',
+  'exclude',
+  'forceAllTransforms',
+  'ignoreBrowserslistConfig',
+  'include',
+  'loose',
+  'modules',
+  'shippedProposals',
+  'spec',
+  'targets',
+  'useBuiltIns',
+];
 
 const defaultOptions = {
   target: 'web', // | 'node'
@@ -45,7 +61,7 @@ module.exports = function preset(_, options = {}) {
 
   return {
     presets: [
-      [r(envPreset), opts],
+      [r(envPreset), pick(opts, presetEnvOptions)],
       [r(reactPreset), { development: env !== 'production' }],
     ],
     plugins: [
