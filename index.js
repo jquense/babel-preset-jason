@@ -1,6 +1,6 @@
 const runtimePlugin = require('@babel/plugin-transform-runtime')
 const envPreset = require('@babel/preset-env')
-const pick = require('lodash/pick');
+const pick = require('lodash/pick')
 const reactPreset = require('@babel/preset-react')
 
 const r = p => (p && p.__esModule ? p.default : p)
@@ -18,7 +18,7 @@ const presetEnvOptions = [
   'spec',
   'targets',
   'useBuiltIns',
-];
+]
 
 const defaultOptions = {
   target: 'web', // | 'node'
@@ -26,8 +26,9 @@ const defaultOptions = {
   modules: 'commonjs',
   useBuiltIns: false,
   shippedProposals: true,
-  runtime: false,
   debug: false,
+  corejs: false,
+  runtime: false,
 }
 
 const defaultBrowsers = ['> 1%', 'last 2 versions']
@@ -79,9 +80,8 @@ module.exports = function preset(_, options = {}) {
       opts.runtime && [
         r(runtimePlugin),
         {
-          polyfill: false,
           regenerator: false,
-          useBuiltIns: opts.useBuiltIns !== 'entry',
+          corejs: opts.corejs,
           useESModules: opts.modules === false,
         },
       ],
