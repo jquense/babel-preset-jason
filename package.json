@@ -1,6 +1,6 @@
 {
   "name": "babel-preset-jason",
-  "version": "4.2.0",
+  "version": "5.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
