@@ -31,7 +31,13 @@ const defaultOptions = {
   runtime: false,
 }
 
-const defaultBrowsers = ['> 1%', 'last 2 versions']
+const defaultBrowsers = [
+  '>= .25%',
+  'not dead',
+  'not op_mini all',
+  'not Android 4.4.3-4.4.4',
+  'not ios_saf < 10',
+]
 
 module.exports = function preset(_, options = {}) {
   const env = process.env.NODE_ENV || 'production' // default to prod
@@ -40,13 +46,11 @@ module.exports = function preset(_, options = {}) {
   const target = opts.target
 
   const nodeTarget = {
-    node: env === 'production' ? '6' : 'current',
+    node: env === 'production' ? '8' : 'current',
   }
 
-  const webTargets = {
-    browsers:
-      env === 'production' ? defaultBrowsers : ['last 2 Chrome versions'],
-  }
+  const webTargets =
+    env === 'production' ? { browsers: defaultBrowsers } : { esmodules: true }
 
   if (target === 'web') {
     opts.targets = opts.targets || webTargets
