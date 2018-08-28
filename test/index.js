@@ -7,7 +7,7 @@ const { stripIndent } = require('common-tags')
 
 const transform = (fixture, options) =>
   transformFileSync(path.join(__dirname, `./fixtures/${fixture}.js`), {
-    presets: [[require.resolve('..'), options || {}]],
+    presets: [[require.resolve('..'), options || { debug: true }]],
     babelrc: false,
   })
 

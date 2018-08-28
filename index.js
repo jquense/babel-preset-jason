@@ -37,9 +37,11 @@ const defaultBrowsers = [
   'not op_mini all',
   'not Android 4.4.3-4.4.4',
   'not ios_saf < 10',
+  'not Chrome < 50', // caniuse lastest is reporting chrome 29
+  'firefox ESR',
 ]
 
-module.exports = function preset(_, options = {}) {
+function preset(_, options = {}) {
   const env = process.env.NODE_ENV || 'production' // default to prod
 
   const opts = Object.assign({}, defaultOptions, options)
@@ -97,3 +99,7 @@ module.exports = function preset(_, options = {}) {
     ].filter(Boolean),
   }
 }
+
+preset.defaultBrowsers = defaultBrowsers
+
+module.exports = preset
