@@ -30,7 +30,7 @@ function preset(api, options = {}) {
       },
     ],
     [reactPreset, { development }],
-  ]
+  ].filter(Boolean)
 
   return {
     presets,
@@ -47,7 +47,10 @@ function preset(api, options = {}) {
       ],
 
       require.resolve('@babel/plugin-syntax-dynamic-import'),
-      [require.resolve('@babel/plugin-proposal-class-properties'), { loose }],
+      [
+        require.resolve('@babel/plugin-proposal-class-properties'),
+        { loose: true },
+      ],
 
       require.resolve('@babel/plugin-proposal-export-default-from'),
       require.resolve('@babel/plugin-proposal-export-namespace-from'),

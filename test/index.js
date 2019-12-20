@@ -11,9 +11,19 @@ const transform = (fixture, options) =>
     babelrc: false,
   })
 
-const { code } = transform('file')
+const transformEsm = (fixture, options) =>
+  transformFileSync(path.join(__dirname, `./fixtures/${fixture}.js`), {
+    presets: [[require.resolve('../esm'), options || { debug: true }]],
+    babelrc: false,
+  })
 
-assert(code, 'It compiles code')
+let result = transform('file')
+
+assert(result.code, 'It compiles code')
+
+result = transformEsm('file')
+
+assert(result.code, 'It compiles code esm')
 
 assert.equal(
   transform('add-exports').code,

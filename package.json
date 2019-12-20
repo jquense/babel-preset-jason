@@ -1,7 +1,6 @@
 {
   "name": "babel-preset-jason",
-  "version": "6.1.0",
-  "description": "",
+  "version": "6.1.1",
   "main": "index.js",
   "scripts": {
     "test": "node test/index.js"
@@ -40,5 +39,5 @@
     "common-tags": "^1.8.0"
   },
   "readme": "ERROR: No README data found!",
-  "_id": "babel-preset-jason@6.0.1"
+  "_id": "babel-preset-jason@6.1.0"
 }
