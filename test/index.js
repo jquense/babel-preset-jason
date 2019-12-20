@@ -24,9 +24,9 @@ assert.equal(
     exports.default = void 0;
     var _default = 'foo';
     exports.default = _default;
-    module.exports = exports["default"];
+    module.exports = exports.default;
   `,
-  'It adds default CJS exports'
+  'It adds default CJS exports',
 )
 
 assert.equal(
@@ -34,5 +34,5 @@ assert.equal(
   stripIndent`
     export default 'foo';
   `,
-  "It doesn't add CJS default export when not compiling modules"
+  "It doesn't add CJS default export when not compiling modules",
 )
