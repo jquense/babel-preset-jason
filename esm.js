@@ -1,6 +1,3 @@
-const { loadConfig } = require('browserslist')
-const pick = require('lodash/pick')
-const path = require('path')
 const envPreset = require('@babel/preset-env')
 const modulesPreset = require('@babel/preset-modules')
 const reactPreset = require('@babel/preset-react')
