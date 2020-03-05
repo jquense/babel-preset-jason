@@ -4,26 +4,26 @@ const reactPreset = require('@babel/preset-react')
 
 function preset(api, options = {}) {
   const {
-    runtime,
-    useBuiltins,
     debug,
+    runtime,
+    useBuiltIns,
     modules = api.env() === 'test',
     development = api.env() === 'test',
   } = options
 
   const presets = [
     [modulesPreset, { loose: true }],
-    useBuiltins && [
+    [
       envPreset,
       {
         debug,
+        useBuiltIns,
         targets: { esmodules: true },
-        exclude: [/.*/],
+        exclude: [/transform/],
         loose: true,
         modules: false,
         shippedProposals: true,
-        useBuiltins: true,
-        corejs: 3,
+        corejs: useBuiltIns ? 3 : undefined,
       },
     ],
     [reactPreset, { development }],
@@ -38,7 +38,6 @@ function preset(api, options = {}) {
         require.resolve('@babel/plugin-transform-runtime'),
         {
           corejs: false,
-          regenerator: false,
           useESModules: modules === false,
         },
       ],
@@ -54,8 +53,6 @@ function preset(api, options = {}) {
 
       // - convenience plugins --
       require.resolve('babel-plugin-dev-expression'),
-      require.resolve('@babel/plugin-proposal-optional-chaining'),
-      require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
     ].filter(Boolean),
   }
 }

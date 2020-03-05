@@ -7,22 +7,22 @@ const { stripIndent } = require('common-tags')
 
 const transform = (fixture, options) =>
   transformFileSync(path.join(__dirname, `./fixtures/${fixture}.js`), {
-    presets: [[require.resolve('..'), options || { debug: true }]],
+    presets: [[require.resolve('..'), options]],
     babelrc: false,
   })
 
 const transformEsm = (fixture, options) =>
   transformFileSync(path.join(__dirname, `./fixtures/${fixture}.js`), {
-    presets: [[require.resolve('../esm'), options || { debug: true }]],
+    presets: [[require.resolve('../esm'), options]],
     babelrc: false,
   })
 
-let result = transform('file')
+let result = transform('file', { debug: true })
 
 assert(result.code, 'It compiles code')
 
-result = transformEsm('file')
-
+console.log('\n\n ESM \n\n')
+result = transformEsm('file', { debug: true })
 assert(result.code, 'It compiles code esm')
 
 assert.equal(
