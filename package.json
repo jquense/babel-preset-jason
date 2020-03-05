@@ -1,6 +1,6 @@
 {
   "name": "babel-preset-jason",
-  "version": "6.1.2",
+  "version": "6.1.3",
   "main": "index.js",
   "scripts": {
     "test": "node test/index.js"
