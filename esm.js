@@ -2,14 +2,40 @@ const envPreset = require('@babel/preset-env')
 const modulesPreset = require('@babel/preset-modules')
 const reactPreset = require('@babel/preset-react')
 
+const builtinRegex = /^(es|es6|es7|esnext|web)\./
+
+// these are polyfills that cover bugs or additions, and aren't
+// likely to actually be needed but may cause bugs depending on usage
+const loosePolyFills = [
+  /^es\.promise/,
+  /^es\.array\.iterator/,
+  /^es\.array\.sort/,
+  /^es\.array\.splice/,
+  /^es\.array\.slice/,
+  /^es\.array\.index-of/,
+  /^es\.array\.reverse/,
+  /^es\.array\.last-index-of/,
+  /^es\.object\.assign/,
+  /^es\.array\.iterator/,
+  /^es\.string\.match/,
+  /^es\.string\.replace/,
+  // this is always added and never used
+  /^web\.dom-collections/,
+]
+
 function preset(api, options = {}) {
   const {
     debug,
     runtime,
     useBuiltIns,
+    includePolyfills = false,
     modules = api.env() === 'test',
     development = api.env() === 'test',
   } = options
+
+  const exclude = [/transform/]
+  if (includePolyfills !== true) exclude.push(builtinRegex)
+  if (includePolyfills === 'loose') exclude.push(...loosePolyFills)
 
   const presets = [
     [modulesPreset, { loose: true }],
@@ -17,9 +43,9 @@ function preset(api, options = {}) {
       envPreset,
       {
         debug,
+        exclude,
         useBuiltIns,
         targets: { esmodules: true },
-        exclude: [/transform/],
         loose: true,
         modules: false,
         shippedProposals: true,
