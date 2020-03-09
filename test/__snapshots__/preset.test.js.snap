@@ -1,0 +1,289 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`esm preset it compiles: code 1`] = `
+"\\"use strict\\";
+
+Object.defineProperty(exports, \\"__esModule\\", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require(\\"react\\"));
+
+var _propTypes = _interopRequireDefault(require(\\"prop-types\\"));
+
+var _warning = _interopRequireDefault(require(\\"warning\\"));
+
+var _contextType = _interopRequireDefault(require(\\"./utils/contextType\\"));
+
+var _chainEvents = _interopRequireDefault(require(\\"./utils/chainEvents\\"));
+
+var _MessageTrigger = _interopRequireDefault(require(\\"./MessageTrigger\\"));
+
+var _jsxFileName = \\"/Users/jquense/src/babel-preset-jason/test/fixtures/file.js\\";
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+//
+import('./foo');
+
+class Button extends _react.default.Component {
+  constructor(..._args) {
+    super(..._args);
+
+    this.handleSubmit = (...args) => {
+      let {
+        formKey,
+        onClick
+      } = this.props;
+      let context = this.context.reactFormalContext;
+      if (onClick) onClick(...args);
+      if (context) context.submitForm(formKey || '@@parent');
+    };
+  }
+
+  render() {
+    let _this$props = this.props,
+        {
+      type,
+      group,
+      events,
+      component: Component
+    } = _this$props,
+        props = _objectWithoutPropertiesLoose(_this$props, [\\"type\\", \\"group\\", \\"events\\", \\"component\\"]);
+
+    (0, _warning.default)(!group || type.toLowerCase() !== 'submit', 'You have specified a \`group\` prop with type=\\"submit\\" on this Form.Button component. ' + 'submit type buttons will automatically trigger a form wide validation. ' + 'to trigger validation for just the group: \`' + group + '\` use type=\\"button\\" instead.');
+    delete props.formKey;
+    if (type.toLowerCase() === 'submit') return _react.default.createElement(Component, Object.assign({}, props, {
+      onClick: this.handleSubmit,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 54
+      },
+      __self: this
+    }), this.props.children);
+    return _react.default.createElement(_MessageTrigger.default, {
+      group: group || '@all',
+      events: events,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 60
+      },
+      __self: this
+    }, (_ref) => {
+      let triggerProps = _objectWithoutPropertiesLoose(_ref, [\\"messages\\"]);
+
+      return _react.default.createElement(Component, Object.assign({}, (0, _chainEvents.default)(events, [props, triggerProps]), {
+        type: type,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 62
+        },
+        __self: this
+      }), this.props.children);
+    });
+  }
+
+}
+
+Button.propTypes = {
+  type: _propTypes.default.oneOf(['button', 'submit']),
+  group: _propTypes.default.string,
+  formKey: _propTypes.default.string,
+  component: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.func]),
+  events: _propTypes.default.arrayOf(_propTypes.default.string),
+  onClick: _propTypes.default.func
+};
+Button.contextTypes = _contextType.default;
+Button.defaultProps = {
+  type: 'button',
+  component: 'button',
+  events: ['onClick']
+};
+var _default = Button;
+exports.default = _default;"
+`;
+
+exports[`esm preset it compiles: debug logs 1`] = `
+Array [
+  "@babel/preset-env: \`DEBUG\` option",
+  "
+Using targets:",
+  "{
+  \\"android\\": \\"61\\",
+  \\"chrome\\": \\"61\\",
+  \\"edge\\": \\"16\\",
+  \\"firefox\\": \\"60\\",
+  \\"ios\\": \\"10.3\\",
+  \\"opera\\": \\"48\\",
+  \\"safari\\": \\"10.1\\",
+  \\"samsung\\": \\"8.2\\"
+}",
+  "
+Using modules transform: false",
+  "
+Using plugins:",
+  "  proposal-nullish-coalescing-operator { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"firefox\\":\\"60\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\", \\"samsung\\":\\"8.2\\" }",
+  "  proposal-optional-chaining { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"firefox\\":\\"60\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\", \\"samsung\\":\\"8.2\\" }",
+  "  proposal-json-strings { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"firefox\\":\\"60\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\", \\"samsung\\":\\"8.2\\" }",
+  "  proposal-optional-catch-binding { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\", \\"samsung\\":\\"8.2\\" }",
+  "  proposal-async-generator-functions { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\" }",
+  "  proposal-object-rest-spread { \\"edge\\":\\"16\\", \\"ios\\":\\"10.3\\", \\"safari\\":\\"10.1\\" }",
+  "  proposal-unicode-property-regex { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"firefox\\":\\"60\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\", \\"samsung\\":\\"8.2\\" }",
+  "  syntax-dynamic-import { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"firefox\\":\\"60\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\", \\"samsung\\":\\"8.2\\" }",
+  "
+Using polyfills: No polyfills were added, since the \`useBuiltIns\` option was not set.",
+]
+`;
+
+exports[`preset it compiles: code 1`] = `
+"\\"use strict\\";
+
+var _interopRequireDefault = require(\\"@babel/runtime/helpers/interopRequireDefault\\");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/extends\\"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/objectWithoutPropertiesLoose\\"));
+
+var _interopRequireWildcard2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/interopRequireWildcard\\"));
+
+var _react = _interopRequireDefault(require(\\"react\\"));
+
+var _propTypes = _interopRequireDefault(require(\\"prop-types\\"));
+
+var _warning = _interopRequireDefault(require(\\"warning\\"));
+
+var _contextType = _interopRequireDefault(require(\\"./utils/contextType\\"));
+
+var _chainEvents = _interopRequireDefault(require(\\"./utils/chainEvents\\"));
+
+var _MessageTrigger = _interopRequireDefault(require(\\"./MessageTrigger\\"));
+
+var _jsxFileName = \\"/Users/jquense/src/babel-preset-jason/test/fixtures/file.js\\";
+//
+Promise.resolve().then(() => (0, _interopRequireWildcard2.default)(require('./foo')));
+
+class Button extends _react.default.Component {
+  constructor() {
+    var _this;
+
+    super(...arguments);
+    _this = this;
+
+    this.handleSubmit = function () {
+      var {
+        formKey,
+        onClick
+      } = _this.props;
+      var context = _this.context.reactFormalContext;
+      if (onClick) onClick(...arguments);
+      if (context) context.submitForm(formKey || '@@parent');
+    };
+  }
+
+  render() {
+    var _this$props = this.props,
+        {
+      type,
+      group,
+      events,
+      component: Component
+    } = _this$props,
+        props = (0, _objectWithoutPropertiesLoose2.default)(_this$props, [\\"type\\", \\"group\\", \\"events\\", \\"component\\"]);
+    (0, _warning.default)(!group || type.toLowerCase() !== 'submit', 'You have specified a \`group\` prop with type=\\"submit\\" on this Form.Button component. ' + 'submit type buttons will automatically trigger a form wide validation. ' + 'to trigger validation for just the group: \`' + group + '\` use type=\\"button\\" instead.');
+    delete props.formKey;
+    if (type.toLowerCase() === 'submit') return _react.default.createElement(Component, (0, _extends2.default)({}, props, {
+      onClick: this.handleSubmit,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 54
+      },
+      __self: this
+    }), this.props.children);
+    return _react.default.createElement(_MessageTrigger.default, {
+      group: group || '@all',
+      events: events,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 60
+      },
+      __self: this
+    }, (_ref) => {
+      var triggerProps = (0, _objectWithoutPropertiesLoose2.default)(_ref, [\\"messages\\"]);
+      return _react.default.createElement(Component, (0, _extends2.default)({}, (0, _chainEvents.default)(events, [props, triggerProps]), {
+        type: type,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 62
+        },
+        __self: this
+      }), this.props.children);
+    });
+  }
+
+}
+
+Button.propTypes = {
+  type: _propTypes.default.oneOf(['button', 'submit']),
+  group: _propTypes.default.string,
+  formKey: _propTypes.default.string,
+  component: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.func]),
+  events: _propTypes.default.arrayOf(_propTypes.default.string),
+  onClick: _propTypes.default.func
+};
+Button.contextTypes = _contextType.default;
+Button.defaultProps = {
+  type: 'button',
+  component: 'button',
+  events: ['onClick']
+};
+var _default = Button;
+exports.default = _default;
+module.exports = exports.default;"
+`;
+
+exports[`preset it compiles: debug logs 1`] = `
+Array [
+  "@babel/preset-env: \`DEBUG\` option",
+  "
+Using targets:",
+  "{
+  \\"android\\": \\"61\\",
+  \\"chrome\\": \\"61\\",
+  \\"edge\\": \\"16\\",
+  \\"firefox\\": \\"60\\",
+  \\"ios\\": \\"10.3\\",
+  \\"opera\\": \\"48\\",
+  \\"safari\\": \\"10.1\\",
+  \\"samsung\\": \\"8.2\\"
+}",
+  "
+Using modules transform: commonjs",
+  "
+Using plugins:",
+  "  proposal-nullish-coalescing-operator { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"firefox\\":\\"60\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\", \\"samsung\\":\\"8.2\\" }",
+  "  proposal-optional-chaining { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"firefox\\":\\"60\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\", \\"samsung\\":\\"8.2\\" }",
+  "  proposal-json-strings { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"firefox\\":\\"60\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\", \\"samsung\\":\\"8.2\\" }",
+  "  proposal-optional-catch-binding { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\", \\"samsung\\":\\"8.2\\" }",
+  "  proposal-async-generator-functions { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\" }",
+  "  proposal-object-rest-spread { \\"edge\\":\\"16\\", \\"ios\\":\\"10.3\\", \\"safari\\":\\"10.1\\" }",
+  "  transform-dotall-regex { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"firefox\\":\\"60\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\" }",
+  "  proposal-unicode-property-regex { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"firefox\\":\\"60\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\", \\"samsung\\":\\"8.2\\" }",
+  "  transform-named-capturing-groups-regex { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"firefox\\":\\"60\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\", \\"samsung\\":\\"8.2\\" }",
+  "  transform-async-to-generator { \\"ios\\":\\"10.3\\", \\"safari\\":\\"10.1\\" }",
+  "  transform-template-literals { \\"ios\\":\\"10.3\\", \\"safari\\":\\"10.1\\" }",
+  "  transform-function-name { \\"edge\\":\\"16\\" }",
+  "  transform-unicode-regex { \\"ios\\":\\"10.3\\", \\"safari\\":\\"10.1\\" }",
+  "  transform-parameters { \\"edge\\":\\"16\\" }",
+  "  transform-block-scoping { \\"ios\\":\\"10.3\\", \\"safari\\":\\"10.1\\" }",
+  "  transform-modules-commonjs { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"firefox\\":\\"60\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\", \\"samsung\\":\\"8.2\\" }",
+  "  proposal-dynamic-import { \\"android\\":\\"61\\", \\"chrome\\":\\"61\\", \\"edge\\":\\"16\\", \\"firefox\\":\\"60\\", \\"ios\\":\\"10.3\\", \\"opera\\":\\"48\\", \\"safari\\":\\"10.1\\", \\"samsung\\":\\"8.2\\" }",
+  "
+Using polyfills: No polyfills were added, since the \`useBuiltIns\` option was not set.",
+]
+`;

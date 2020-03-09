@@ -7,7 +7,7 @@ const builtinRegex = /^(es|es6|es7|esnext|web)\./
 // these are polyfills that cover bugs or additions, and aren't
 // likely to actually be needed but may cause bugs depending on usage
 const loosePolyFills = [
-  /^es\.promise/,
+  /^es\.promise$/,
   /^es\.array\.iterator/,
   /^es\.array\.sort/,
   /^es\.array\.splice/,
@@ -34,8 +34,10 @@ function preset(api, options = {}) {
   } = options
 
   const exclude = [/transform/]
-  if (includePolyfills !== true) exclude.push(builtinRegex)
-  if (includePolyfills === 'loose') exclude.push(...loosePolyFills)
+  if (useBuiltIns) {
+    if (includePolyfills === 'loose') exclude.push(...loosePolyFills)
+    else if (includePolyfills !== true) exclude.push(builtinRegex)
+  }
 
   const presets = [
     [modulesPreset, { loose: true }],
