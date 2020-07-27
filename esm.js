@@ -1,5 +1,4 @@
 const envPreset = require('@babel/preset-env')
-const modulesPreset = require('@babel/preset-modules')
 const reactPreset = require('@babel/preset-react')
 
 const builtinRegex = /^(es|es6|es7|esnext|web)\./
@@ -33,20 +32,20 @@ function preset(api, options = {}) {
     development = api.env() === 'test',
   } = options
 
-  const exclude = [/transform/]
+  const exclude = []
   if (useBuiltIns) {
     if (includePolyfills === 'loose') exclude.push(...loosePolyFills)
     else if (includePolyfills !== true) exclude.push(builtinRegex)
   }
 
   const presets = [
-    [modulesPreset, { loose: true }],
     [
       envPreset,
       {
         debug,
-        exclude,
+        exclude: exclude.length ? exclude : undefined,
         useBuiltIns,
+        bugfixes: true,
         targets: { esmodules: true },
         loose: true,
         modules: false,

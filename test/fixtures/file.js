@@ -9,6 +9,10 @@ import Trigger from './MessageTrigger'
 //
 import('./foo')
 
+async function hey() {
+  await true
+}
+
 class Button extends React.Component {
   static propTypes = {
     type: PropTypes.oneOf(['button', 'submit']),
@@ -44,7 +48,7 @@ class Button extends React.Component {
         'submit type buttons will automatically trigger a form wide validation. ' +
         'to trigger validation for just the group: `' +
         group +
-        '` use type="button" instead.'
+        '` use type="button" instead.',
     )
 
     delete props.formKey

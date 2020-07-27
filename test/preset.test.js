@@ -25,7 +25,7 @@ describe('preset', () => {
     let result = transform('file', { debug: true })
 
     expect(result.code).toMatchSnapshot('code')
-    expect(spy.mock.calls.map(args => format(...args))).toMatchSnapshot(
+    expect(spy.mock.calls.map((args) => format(...args))).toMatchSnapshot(
       'debug logs',
     )
 
@@ -77,7 +77,7 @@ describe('esm preset', () => {
     let result = transformEsm('file', { debug: true })
 
     expect(result.code).toMatchSnapshot('code')
-    expect(spy.mock.calls.map(args => format(...args))).toMatchSnapshot(
+    expect(spy.mock.calls.map((args) => format(...args))).toMatchSnapshot(
       'debug logs',
     )
 
